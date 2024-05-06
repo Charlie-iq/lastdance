@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import './App.css'
-import Login from './component/login/login'
-
+import Login from './component/login'
+import Sidebar from './component/sidebar'
+import Dashboard from './component/Dashboard'
 function App() {
-
+  const [sidebarToggle,setSidebarToggle] = useState(false)
   return (
-    <div className='text-white h-[100vh] flex items-center justify-center bg-cover' style={{"backgroundImage" : "url('src/assets/Spiderman 2099_Batman beyond team up.jpg')"}}>
-   <Login/>
+    <div >
+   <Sidebar sidebarToggle={sidebarToggle}/>
+   <Dashboard
+   sidebarToggle={sidebarToggle}
+   setSidebarToggle={setSidebarToggle}
+   />
     </div>
   )
 }
