@@ -1,56 +1,75 @@
-import React from 'react'
-import {FaHome} from 'react-icons/fa'
-import { BiArchiveOut } from "react-icons/bi";
-import { BiArchiveIn } from "react-icons/bi";
-import { MdDashboard } from "react-icons/md";
-import { BiSolidInfoCircle } from "react-icons/bi";
+import React, { useState } from 'react';
+import {
+    FaTh,
+    FaBars,
+    FaUserAlt,
+    FaRegChartBar,
+    FaCommentAlt,
+    FaShoppingBag,
+    FaThList
+}from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
-const Sidebar = ({sidebarToggle}) => {
-  return (
-    <div className={`${sidebarToggle ? "hidden" : "block" } w-64 bg-gray-800 fixed h-full px-4 py-2`}>
-    
-      <div className='my-2 mb-4'>
-        <h1 className='text-2x text-white font-bold'>Admin Dashboard</h1>
-      </div>
-      <hr/>
-      <ul className='mt-3 text-white font-bold'>
-        <li className='mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
-          <a href='' className="px-3">
-           <FaHome className="inline-block w-6 h-6 mr-2 -mt-1"></FaHome> Home
-          </a>
-        </li>
-      </ul>
-      <ul className='mt-3 text-white font-bold'>
-        <li className='mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
-          <a href='' className="px-3">
-           <BiArchiveIn className="inline-block w-6 h-6 mr-2 -mt-1"></BiArchiveIn> Incoming record
-          </a>
-        </li>
-      </ul>
-      <ul className='mt-3 text-white font-bold'>
-        <li className='mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
-          <a className="px-3">
-           <BiArchiveOut className="inline-block w-6 h-6 mr-2 -mt-1"></BiArchiveOut> Outgoing record 
-          </a>
-        </li>
-        
-      </ul>
-      <ul className='mt-3 text-white font-bold'>
-        <li className='mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
-          <a href='' className="px-3">
-           <MdDashboard className="inline-block w-6 h-6 mr-2 -mt-1"></MdDashboard> Admin Dashboard
-          </a>
-        </li>
-      </ul>
-      <ul className='mt-3 text-white font-bold'>
-        <li className='mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
-          <a href='' className="px-3">
-           <BiSolidInfoCircle className="inline-block w-6 h-6 mr-2 -mt-1"></BiSolidInfoCircle> About
-          </a>
-        </li>
-      </ul>
-    </div>
-  )
-}
+const Sidebar = ({children}) => {
+    const[isOpen ,setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
+    const menuItem=[
+        {
+            path:"/",
+            name:"Dashboard",
+            icon:<FaTh/>
+        },
+        {
+            path:"/about",
+            name:"About",
+            icon:<FaUserAlt/>
+        },
+        {
+            path:"/analytics",
+            name:"Analytics",
+            icon:<FaRegChartBar/>
+        },
+        {
+            path:"/comment",
+            name:"Comment",
+            icon:<FaCommentAlt/>
+        },
+        {
+            path:"/product",
+            name:"Product",
+            icon:<FaShoppingBag/>
+        },
+        {
+            path:"/productList",
+            name:"Product List",
+            icon:<FaThList/>
+        }
+    ];
 
-export default Sidebar
+    return (
+        <div className="container flex">
+           <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar  bg-black text-white h-screen transition-all duration-500">
+               <div className="mt-10 flex items-center p-5 cursor:pointer">
+                   <h1 style={{display: isOpen ? "block" : "none"}} className=" text-2xl">CS&IT</h1>
+                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="cursor:pointer flex items-center ml-10">
+                       <FaBars className='cursor:pointer'  onClick={toggle}/>
+                   </div>
+               </div>
+               {menuItem.map((item, index) => (
+                   <NavLink
+                       to={item.path}
+                       key={index}
+                       className="link flex items-center px-5 py-3 gap-3 transition-all duration-500 hover:bg-blue-400 hover:text-black"
+                       ClassName="active bg-blue-400 text-black"
+                   >
+                       <div className="icon text-xl">{item.icon}</div>
+                       <div style={{display: isOpen ? "block" : "none"}} className="link_text text-lg">{item.name}</div>
+                   </NavLink>
+               ))}
+           </div>
+           <main className="w-full p-20">{children}</main>
+        </div>
+    );
+};
+
+export default Sidebar;

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "income",
     "pluralName": "incomes",
-    "displayName": "Income"
+    "displayName": "Income",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -30,12 +31,12 @@
       "required": true,
       "unique": false
     },
-    "dateNum": {
-      "type": "date",
-      "required": true
-    },
     "subject": {
       "type": "text"
+    },
+    "bookDate": {
+      "type": "date",
+      "required": true
     }
   }
 }

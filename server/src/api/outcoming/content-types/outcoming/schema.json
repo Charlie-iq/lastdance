@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "outcomings",
+  "info": {
+    "singularName": "outcoming",
+    "pluralName": "outcomings",
+    "displayName": "Outcoming",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "serial": {
+      "required": true,
+      "unique": true,
+      "type": "integer",
+      "default": 1
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "departmentName": {
+      "type": "string",
+      "required": true
+    },
+    "bookNum": {
+      "type": "string",
+      "required": true
+    },
+    "subject": {
+      "type": "text"
+    },
+    "bookDate": {
+      "type": "date",
+      "required": true
+    }
+  }
+}

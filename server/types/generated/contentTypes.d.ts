@@ -368,6 +368,7 @@ export interface ApiIncomeIncome extends Schema.CollectionType {
     singularName: 'income';
     pluralName: 'incomes';
     displayName: 'Income';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -380,8 +381,8 @@ export interface ApiIncomeIncome extends Schema.CollectionType {
     date: Attribute.Date & Attribute.Required;
     departmentName: Attribute.Text & Attribute.Required;
     bookNum: Attribute.String & Attribute.Required;
-    dateNum: Attribute.Date & Attribute.Required;
     subject: Attribute.Text;
+    bookDate: Attribute.Date & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -393,6 +394,45 @@ export interface ApiIncomeIncome extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::income.income',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOutcomingOutcoming extends Schema.CollectionType {
+  collectionName: 'outcomings';
+  info: {
+    singularName: 'outcoming';
+    pluralName: 'outcomings';
+    displayName: 'Outcoming';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    serial: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.DefaultTo<1>;
+    date: Attribute.Date & Attribute.Required;
+    departmentName: Attribute.String & Attribute.Required;
+    bookNum: Attribute.String & Attribute.Required;
+    subject: Attribute.Text;
+    bookDate: Attribute.Date & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::outcoming.outcoming',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::outcoming.outcoming',
       'oneToOne',
       'admin::user'
     > &
@@ -837,6 +877,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::income.income': ApiIncomeIncome;
+      'api::outcoming.outcoming': ApiOutcomingOutcoming;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
