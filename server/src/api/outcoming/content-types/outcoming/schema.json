@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "serial": {
-      "required": true,
-      "unique": true,
-      "type": "integer",
-      "default": 1
-    },
     "date": {
       "type": "date",
       "required": true
