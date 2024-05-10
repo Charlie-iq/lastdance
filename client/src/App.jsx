@@ -15,8 +15,7 @@ const App = () => {
           <Route path="/IncomeTable" element={<IncomeTable />} />
           <Route path="/OutcomeTable" element={<OutcomeTable />} />
           <Route path="/OutcomeInsert" element={<OutcomeInsert />} />
-          <Route path="/IncomeInsert" element={<IncomeInsert />} />
-          
+          <Route path="/IncomeInsert" element={<IncomeInsert />} />         
         </Routes>
       </Sidebar>
     </BrowserRouter>

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const OutcomeInsert = () => {
+const API_URL = 'http://localhost:1337/api/Incomes';
+const API_TOKEN = 'Bearer 200c078420d853c65301869bc630cb90048ae53944baf4f3f205f3d1b5462a65ee94e5ecc804ac0170258ecab15b0752ab7f88bcc702c9e3df11017e45b231831cf035cb27ff96551782c15dc61457d1500e35b577845f821e8abf9b88ffcfbc8693711cf692acab62dc87c462782304cba700659de947517e102a66b0f54050';
+
+const IncomeInsert = () => {
   const [formData, setFormData] = useState({
     date: '',
     departmentName: '',
@@ -15,9 +18,9 @@ const OutcomeInsert = () => {
   // Function to fetch the current ID from the database
   const fetchCurrentId = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/api/outcomings', {
+      const response = await axios.get(API_URL, {
         headers: {
-          Authorization: 'Bearer 200c078420d853c65301869bc630cb90048ae53944baf4f3f205f3d1b5462a65ee94e5ecc804ac0170258ecab15b0752ab7f88bcc702c9e3df11017e45b231831cf035cb27ff96551782c15dc61457d1500e35b577845f821e8abf9b88ffcfbc8693711cf692acab62dc87c462782304cba700659de947517e102a66b0f54050',
+          Authorization: API_TOKEN,
         },
       });
       setCurrentId(response.data.id);
@@ -36,11 +39,11 @@ const OutcomeInsert = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:1337/api/outcomings',
+        API_URL,
         { data: formData },
         {
           headers: {
-            Authorization: 'Bearer 200c078420d853c65301869bc630cb90048ae53944baf4f3f205f3d1b5462a65ee94e5ecc804ac0170258ecab15b0752ab7f88bcc702c9e3df11017e45b231831cf035cb27ff96551782c15dc61457d1500e35b577845f821e8abf9b88ffcfbc8693711cf692acab62dc87c462782304cba700659de947517e102a66b0f54050',
+            Authorization: API_TOKEN,
           },
         }
       );
@@ -136,4 +139,4 @@ const OutcomeInsert = () => {
   );
 };
 
-export default OutcomeInsert;
+export default IncomeInsert;
